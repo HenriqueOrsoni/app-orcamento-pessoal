@@ -13,6 +13,19 @@ class Despesa {
             if (this[i] == undefined || this[i] == '' || this[i] == null) {
                 return false
             }
+        }      
+        return true
+    }
+
+    validaData() {
+        let ano = parseInt(this.ano)
+        let mes = parseInt(this.mes) - 1
+        let dia = parseInt(this.dia)
+
+        let data = new Date(ano, mes, dia)
+
+        if(data.getDate() != dia || data.getMonth() != mes || data.getFullYear() != ano) {
+            return false
         }
         return true
     }
@@ -111,6 +124,20 @@ function cadastrarDespesa() {
     let valor = document.getElementById('valor')
 
     let despesa = new Despesa(ano.value, mes.value, dia.value, tipo.value, descricao.value, valor.value)
+
+    if(despesa.ano != '' && despesa.mes != '' && despesa.dia != '') {
+        
+        if(!despesa.validaData()) {
+            document.getElementById('exampleModalLabel').innerHTML = 'Data inválida'
+            document.getElementById('exampleModalLabel').className = 'modal-title text-warning'
+            document.getElementById('texto-modal').innerHTML = 'A data informada não existe (ex: 31/02 ou 29/02 em ano não bissexto).'
+            document.getElementById('fecharModal').innerHTML = 'Voltar e corrigir'
+            document.getElementById('fecharModal').className = 'btn btn-warning'
+            $('#modalRegistraDespesa').modal('show')
+    
+            return
+        }
+    }
 
     if (despesa.validarDados()) {
         bd.gravar(despesa)
