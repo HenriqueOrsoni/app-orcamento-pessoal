@@ -169,6 +169,10 @@ function carregaListaDespesas() {
             case 5:
                 linha.insertCell(1).innerHTML = 'Transporte'
                 break
+
+            case 6:
+                linha.insertCell(1).innerHTML = 'Outro'
+                break
         }
 
         linha.insertCell(2).innerHTML = d.descricao
@@ -217,6 +221,10 @@ function pesquisarDespesa() {
 
             case 5:
                 linha.insertCell(1).innerHTML = 'Transporte'
+                break
+            
+            case 6:
+                linha.insertCell(1).innerHTML = 'Outro'
                 break
         }
 
